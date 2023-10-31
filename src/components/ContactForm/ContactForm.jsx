@@ -20,7 +20,7 @@ export default function ContactForm (onSubmit) {
         //        setNumber: [''],
         //     })
         //  }, [reset])
-     
+       
      
     }
 
@@ -49,8 +49,7 @@ export default function ContactForm (onSubmit) {
     // });
 
     const nameInputId = nanoid();
-   const numberInputId = nanoid();
-    
+    const numberInputId = nanoid();
     
         return (
             <div className={css.contactForm}>

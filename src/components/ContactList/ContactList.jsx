@@ -3,7 +3,6 @@ import ContactElement from "../ContactElement/ContactElement";
 
 import css from './ContactList.module.css';
 
-
 const ContactList = ({ contacts, onRemoveContact }) => (
   <div className={css.contactContainer}>
   <ul className={css.contactList}>
