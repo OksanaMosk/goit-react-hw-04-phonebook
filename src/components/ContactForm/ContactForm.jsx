@@ -5,48 +5,40 @@ import css from './ContactForm.module.css'
 import { nanoid } from 'nanoid';
 import { useState } from "react";
 
-
-export default function ContactForm (onSubmit) {
-    const [text, setText] = useState('');
+const ContactForm = ({onSubmit }) => {
+    const [name, setName] = useState('');
     const [number, setNumber] = useState('');
  
    
-    
+    const reset = () => {
+        setName('');
+        setNumber('');
+    };  
+
    const handleSubmit = event => {
         event.preventDefault();
-        //  useEffect(() => {
-        //     reset({
-        //      setName: [''],
-        //        setNumber: [''],
-        //     })
-        //  }, [reset])
-       
+      onSubmit( name, number );
+       reset();
+    };  
      
-    }
 
     
     const handleInputChange = event => {
-        const name = event.target.name;
-        const value = event.target.value;
-
-    
+       const { name, value } = event.target;
+        
         switch (name) {
-            case 'text': {
-                setText(value);
-                return;
+            case 'name': {
+                setName(value);
+                break;
             }
             case 'number': {
                 setNumber(value);
-                return;
+                break;
             }
             default:
                 return;
         };
-    }
-    // const reset = (() => {
-    //     setNumber: [''],
-    //     setName: [''],
-    // });
+}
 
     const nameInputId = nanoid();
     const numberInputId = nanoid();
@@ -58,9 +50,9 @@ export default function ContactForm (onSubmit) {
                         <p className={css.inputName}>Name
                         </p>
                         <input type="text"
-                            name="text"
+                            name="name"
                             id={nameInputId}
-                            value={text}
+                            value={name}
                             onChange={handleInputChange}
                             className={css.formInput}
                             placeholder="Name"
@@ -93,5 +85,4 @@ export default function ContactForm (onSubmit) {
 
 };
 
-
-
+export default ContactForm;

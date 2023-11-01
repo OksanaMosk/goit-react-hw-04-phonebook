@@ -11,7 +11,8 @@ import css from './App.module.css'
 
 export const App = () => {
 
-  const [contacts, setContacts] = useState('');
+  const [contacts, setContacts] = useState([]);
+  const [filter, setFilter] = useState('');
 
 // componentDidMount() {
     
@@ -32,47 +33,42 @@ export const App = () => {
   
   
 
-  const handleAddContact = (contact) => {
-    const isContacts = contacts.some(
-      ({ text }) => text.toLowerCase() === contact.text.toLowerCase()
-    );
-  
+  const handleAddContact = (name, number) => {
 
-    if (isContacts) {
-      alert(`${contact.text} is already in contacts`);
+     if (contacts.find(contact => contact.name === name)) {
+      alert(`${name}  is already in contacts`);
       return;
     }
-    setContacts(prevContacts => ({
-      contacts: [{ id: nanoid(), ...contact }, ...prevContacts],
-    }));
-  }
+    const contact = {
+      id: nanoid(),
+      name,
+      number,
+    };
   
- const visibleContacts = (contact) => {
-   return contact;
-   
+    setContacts(prevState => [...prevState, contact]);
   };
 
 
+  const removeContact = contactId => {
+    setContacts(contacts.filter(({ id }) => id !== contactId))
+  };
 
-const changeFilter = event => {
-   setContacts({ filter: event.target.value });
+const changeFilter = filter => {
+  setFilter(filter);
+  };
+
+  const visibleContacts = () => {
+    // const { filter, contacts } = this.state;
+
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
   };
 
 
-const removeContact = contactId => {
-    setContacts(prevContacts=> {
-  return {
-   contacts: prevContacts.filter(({ id }) => id !== contactId),
-      };
-    });
-  };
-
-
-if (contacts!== setContacts) {
-      localStorage.setItem("contacts", JSON.stringify(contacts))
-    }
- 
-
+  // const { filter } = filter;
     const visContacts = visibleContacts();
 
   return (
