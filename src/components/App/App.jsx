@@ -27,25 +27,6 @@ export const App = () => {
 
 
 
-// componentDidMount() {
-    
-//     const contacts = localStorage.getItem('contacts');
-//     const parsedContacts = JSON.parse(contacts);
-//     if (parsedContacts) {
-//       this.setState({ contacts: parsedContacts });
-
-//     }
-//   }
-  
-//   componentDidUpdate(prevProps, prevState) {
-
-//     if (this.state.contacts !== prevState.contacts) {
-//       localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
-//     }
-// }
-  
-  
-
   const handleAddContact = (name, number) => {
 
      if (contacts.find(contact => contact.name === name)) {
@@ -66,12 +47,14 @@ export const App = () => {
     setContacts(contacts.filter(({ id }) => id !== contactId))
   };
 
-const changeFilter = filter => {
-  setFilter(filter);
+
+  const changeFilter = event => {
+    setFilter(event.target.value);
+  
   };
 
   const visibleContacts = () => {
-    // const { filter, contacts } = this.state;
+
 
     const normalizedFilter = filter.toLowerCase();
 
@@ -81,7 +64,6 @@ const changeFilter = filter => {
   };
 
 
-  // const { filter } = filter;
     const visContacts = visibleContacts();
 
   return (
