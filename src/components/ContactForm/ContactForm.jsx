@@ -5,7 +5,8 @@ import css from './ContactForm.module.css'
 import { nanoid } from 'nanoid';
 import { useState } from "react";
 
-const ContactForm = ({onSubmit }) => {
+
+export default function ContactForm({onSubmit }) {
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
  
@@ -39,6 +40,9 @@ const ContactForm = ({onSubmit }) => {
                 return;
         };
 }
+    
+   
+
 
     const nameInputId = nanoid();
     const numberInputId = nanoid();
@@ -85,4 +89,5 @@ const ContactForm = ({onSubmit }) => {
 
 };
 
-export default ContactForm;
+
+
